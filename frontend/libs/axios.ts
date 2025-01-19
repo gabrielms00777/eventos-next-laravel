@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const api = axios.create({
-    baseURL: process.env.API_BASE_URL,
+    baseURL: 'http://localhost:8000',
     // baseURL: 'http://api-react-vite.test',
     headers: {
         'Accept': 'application/json',

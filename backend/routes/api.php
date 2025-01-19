@@ -9,7 +9,8 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 // Super Admin Routes
-Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
+Route::middleware(['auth:sanctum', 'role:admin'])->prefix('admin')->group(function () {
+    Route::apiResource('events', EventController::class);
     // Route::get('/admin', [AdminController::class, 'dashboard']); // Dashboard do Super Admin
     // Route::get('/admin/events', [EventController::class, 'index']); // Listar todos os eventos
     // Route::post('/admin/events', [EventController::class, 'store']); // Criar um novo evento
@@ -21,7 +22,6 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
 
 // Event Admin Routes
 Route::middleware(['auth:sanctum', 'role:event_owner'])->group(function () {
-    Route::apiResource('events', EventController::class);
     // Route::get('/events/{uuid}/admin', [EventAdminController::class, 'dashboard']); // Painel principal do evento
     // Route::get('/events/{uuid}/admin/staff', [StaffController::class, 'index']); // Listar funcionários
     // Route::post('/events/{uuid}/admin/staff', [StaffController::class, 'store']); // Adicionar funcionário
