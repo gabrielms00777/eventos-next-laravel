@@ -6,7 +6,7 @@ CREATE TABLE users (
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
-    role ENUM('super_admin', 'event_owner', 'staff') NOT NULL,
+    role ENUM('admin', 'event_admin', 'staff') NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
@@ -20,8 +20,8 @@ CREATE TABLE events (
     max_participants INT UNSIGNED NOT NULL,
     start_date DATETIME NOT NULL,
     end_date DATETIME NOT NULL,
-    created_by BIGINT UNSIGNED NOT NULL,
-    FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE CASCADE,
+    owner_id BIGINT UNSIGNED NOT NULL,
+    FOREIGN KEY (owner_id) REFERENCES users(id) ON DELETE CASCADE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
